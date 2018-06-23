@@ -14,4 +14,4 @@ before_script:
 script:
   - ./gradlew build
   - ./gradlew test
-  - ./gradlew sonar
+  - ./gradlew sonarqube
