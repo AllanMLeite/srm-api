@@ -1,4 +1,4 @@
-package com.srm.api.cucumber;
+package com.srm.api.cucumber.cliente.incluir;
 
 import org.junit.runner.RunWith;
 

@@ -1,4 +1,4 @@
-package com.srm.api.cucumber;
+package com.srm.api.cucumber.cliente.incluir;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -51,7 +51,7 @@ public class PassosParaIncluirClienteTest {
 	@Quando("^incluir$")
 	public void clico_em_Salvar() throws Throwable {
 		ClienteService service = new ClienteService();
-		service.setMetricaRepository(new ClienteRepository());
+		service.setClienteRepository(new ClienteRepository());
 
 		try {
 			assertNull(cliente.getId());

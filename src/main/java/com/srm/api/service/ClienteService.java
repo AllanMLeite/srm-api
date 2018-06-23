@@ -1,5 +1,7 @@
 package com.srm.api.service;
 
+import java.util.ArrayList;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -17,7 +19,7 @@ public class ClienteService {
 
 	public Cliente salvar(Cliente cliente) {
 		validarInclusao(cliente);
-		return clienteRepository.incluir(new Cliente());
+		return clienteRepository.incluir(cliente);
 	}
 
 	private void validarInclusao(Cliente cliente) {
@@ -35,7 +37,11 @@ public class ClienteService {
 			throw new RestClientException("Informe o risco.");
 	}
 
-	public void setMetricaRepository(ClienteRepository metricaRepository) {
+	public void setClienteRepository(ClienteRepository metricaRepository) {
 		this.clienteRepository = metricaRepository;
+	}
+
+	public ArrayList<Cliente> listar() {
+		return clienteRepository.listar();
 	}
 }

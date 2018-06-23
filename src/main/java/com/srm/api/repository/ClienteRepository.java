@@ -22,5 +22,9 @@ public class ClienteRepository {
         cliente.setId(idSequence.incrementAndGet());
         clientes.add(cliente);
         return cliente;
-    }    
+    }
+
+	public ArrayList<Cliente> listar() {
+		return (ArrayList<Cliente>) clientes;
+	}    
 }

@@ -1,5 +1,5 @@
 # language: pt
-Funcionalidade: Incuir cliente
+Funcionalidade: Incluir cliente
 
   Contexto: 
     Dado que estou incluindo um novo cliente
