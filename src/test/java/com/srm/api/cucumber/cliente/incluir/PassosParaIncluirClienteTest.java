@@ -8,7 +8,6 @@ import java.lang.reflect.Field;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import org.junit.Before;
 import org.springframework.web.client.RestClientException;
 
 import com.srm.api.model.Cliente;
@@ -29,6 +28,7 @@ public class PassosParaIncluirClienteTest {
 		cliente = new Cliente();
 		cliente.setNome("João");
 		cliente.setRisco('A');
+		cliente.setLimite(Double.parseDouble("45"));
 	}
 
 	@Dado("^que informei \"(.*?)\" no campo \"(.*?)\"$")

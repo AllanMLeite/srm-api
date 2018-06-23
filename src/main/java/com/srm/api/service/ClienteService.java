@@ -25,6 +25,7 @@ public class ClienteService {
 	private void validarInclusao(Cliente cliente) {
 		validaObrigatoriedadeNome(cliente);
 		validaObrigatoriedadeRisco(cliente);
+		validaObrigatoriedadeLimite(cliente);
 	}
 
 	private void validaObrigatoriedadeNome(Cliente cliente) {
@@ -36,6 +37,12 @@ public class ClienteService {
 		if (StringUtils.isEmpty(cliente.getRisco()))
 			throw new RestClientException("Informe o risco.");
 	}
+	
+	private void validaObrigatoriedadeLimite(Cliente cliente) {
+		if (cliente.getLimite() == null)
+			throw new RestClientException("Informe o limite.");
+	}
+
 
 	public void setClienteRepository(ClienteRepository metricaRepository) {
 		this.clienteRepository = metricaRepository;
