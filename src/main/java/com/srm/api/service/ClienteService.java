@@ -2,14 +2,13 @@ package com.srm.api.service;
 
 import java.util.ArrayList;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClientException;
 
 import com.srm.api.model.Cliente;
+import com.srm.api.model.dto.ClienteDto;
 import com.srm.api.repository.ClienteRepository;
 
 @Service
@@ -18,8 +17,8 @@ public class ClienteService {
 	@Autowired 
 	private ClienteRepository clienteRepository;
 
-	public Cliente salvar(Cliente cliente) {
-		validarInclusao(cliente);
+	public Cliente salvar(ClienteDto clienteDto) {
+		Cliente cliente = new Cliente(clienteDto);
 		return clienteRepository.save(cliente);
 	}
 

@@ -19,7 +19,7 @@ public class ClienteController {
 
 	@RequestMapping(value = "/cliente", method = RequestMethod.POST)
 	public Cliente incluir(@RequestBody Cliente cliente) {
-		return clienteService.salvar(cliente);
+		return null;//clienteService.salvar(cliente);
 	}
 
 	@RequestMapping(value = "/cliente", method = RequestMethod.GET)
