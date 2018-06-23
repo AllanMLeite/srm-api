@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.srm.api.model.Cliente;
+import com.srm.api.model.dto.ClienteDto;
 import com.srm.api.service.ClienteService;
 
 @RestController
@@ -18,8 +19,8 @@ public class ClienteController {
 	private ClienteService clienteService;
 
 	@RequestMapping(value = "/cliente", method = RequestMethod.POST)
-	public Cliente incluir(@RequestBody Cliente cliente) {
-		return null;//clienteService.salvar(cliente);
+	public void incluir(@RequestBody ClienteDto clienteDto) {
+		clienteService.salvar(clienteDto);
 	}
 
 	@RequestMapping(value = "/cliente", method = RequestMethod.GET)
