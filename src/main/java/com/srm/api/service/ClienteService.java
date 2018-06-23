@@ -22,11 +22,17 @@ public class ClienteService {
 
 	private void validarInclusao(Cliente cliente) {
 		validaObrigatoriedadeNome(cliente);
+		validaObrigatoriedadeRisco(cliente);
 	}
 
 	private void validaObrigatoriedadeNome(Cliente cliente) {
 		if (StringUtils.isEmpty(cliente.getNome()))
 			throw new RestClientException("Informe o nome.");
+	}
+	
+	private void validaObrigatoriedadeRisco(Cliente cliente) {
+		if (StringUtils.isEmpty(cliente.getRisco()))
+			throw new RestClientException("Informe o risco.");
 	}
 
 	public void setMetricaRepository(ClienteRepository metricaRepository) {

@@ -5,7 +5,7 @@ public class Cliente {
     private Long id;
     private String nome;
     private Double limite;
-    private char risco;
+    private Character risco;
     private Integer taxa;
     
 	public Long getId() {
@@ -26,10 +26,10 @@ public class Cliente {
 	public void setLimite(Double limite) {
 		this.limite = limite;
 	}
-	public char getRisco() {
+	public Character getRisco() {
 		return risco;
 	}
-	public void setRisco(char risco) {
+	public void setRisco(Character risco) {
 		this.risco = risco;
 	}
 	public Integer getTaxa() {

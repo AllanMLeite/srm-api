@@ -6,7 +6,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src\\test\\resources\\cucumber\\IncluirMetrica.feature",  strict = true)
-public class IncluirMetricaTest {
+@CucumberOptions(features = "src\\test\\resources\\cucumber\\IncluirCliente.feature",  strict = true)
+public class IncluirClienteTest {
 
 }
