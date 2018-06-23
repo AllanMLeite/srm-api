@@ -13,3 +13,11 @@ Funcionalidade: Incuir cliente
       | campo | mensagem         |
       | nome  | Informe o nome.  |
       | risco | Informe o risco. |
+
+      Cenario: Deve salvar o cliente
+    Dado que informei "Maurício" no campo "nome"
+    E que informei "B" no campo "risco"
+    Quando incluir
+    Entao salva o cliente
+    E nao exibe mensagem
+    

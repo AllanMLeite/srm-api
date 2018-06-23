@@ -1,6 +1,8 @@
 package com.srm.api.cucumber;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.lang.reflect.Field;
 
@@ -31,19 +33,19 @@ public class PassosParaIncluirClienteTest {
 
 	@Dado("^que informei \"(.*?)\" no campo \"(.*?)\"$")
 	public void que_informei_no_campo(String valor, String campo) throws Throwable {
-		
+
 		Field campoEncontrado = FieldUtils.getField(cliente.getClass(), campo, true);
-		
+
 		if (StringUtils.isBlank(valor)) {
 			FieldUtils.writeField(cliente, campo, null, true);
 			return;
 		}
-		
+
 		if (campoEncontrado.getType().isAssignableFrom(Character.class)) {
-			FieldUtils.writeField(cliente, campo, valor.charAt(0), true);			
-		}else {
+			FieldUtils.writeField(cliente, campo, valor.charAt(0), true);
+		} else {
 			FieldUtils.writeField(cliente, campo, valor, true);
-		}		
+		}
 	}
 
 	@Quando("^incluir$")
@@ -52,7 +54,8 @@ public class PassosParaIncluirClienteTest {
 		service.setMetricaRepository(new ClienteRepository());
 
 		try {
-			 service.salvar(cliente);
+			assertNull(cliente.getId());
+			cliente = service.salvar(cliente);
 		} catch (RestClientException e) {
 			mensagemErro = e.getMessage();
 		}
@@ -62,4 +65,15 @@ public class PassosParaIncluirClienteTest {
 	public void o_sistema_exibe_a_mensagem(String mensagemEsperada) throws Throwable {
 		assertEquals(mensagemEsperada, mensagemErro);
 	}
+
+	@Entao("^salva o cliente$")
+	public void salva_o_cliente() throws Throwable {
+		assertNotNull(cliente.getId());
+	}
+
+	@Entao("^nao exibe mensagem$")
+	public void nao_exibe_mensagem() throws Throwable {
+		assertNull(mensagemErro);
+	}
+
 }
