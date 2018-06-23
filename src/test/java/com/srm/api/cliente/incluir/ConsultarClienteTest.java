@@ -1,4 +1,4 @@
-package com.srm.api.cucumber.cliente.incluir;
+package com.srm.api.cliente.incluir;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;

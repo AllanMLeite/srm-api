@@ -1,4 +1,4 @@
-package com.srm.api.cucumber.cliente.incluir;
+package com.srm.api.cliente.incluir;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -99,7 +99,8 @@ public class IncluirClienteTest extends BaseTeste {
 		ClienteDto clienteDto = new ClienteDto(nomeInformado, limiteInformado, riscoInformado);
 		Long idCliente = clienteService.salvar(clienteDto).getId();
 		Cliente clienteIncluido = clienteService.consultar(idCliente);
-		compararValoresClienteIncluido(nomeInformado, limiteInformado, riscoInformado, RiscoEnum.A, clienteIncluido);
+		ComparadorCliente.compararValoresClienteIncluido(nomeInformado, limiteInformado, riscoInformado, RiscoEnum.A,
+				clienteIncluido);
 	}
 
 	@Test
@@ -110,7 +111,8 @@ public class IncluirClienteTest extends BaseTeste {
 		ClienteDto clienteDto = new ClienteDto(nomeInformado, limiteInformado, riscoInformado);
 		Long idCliente = clienteService.salvar(clienteDto).getId();
 		Cliente clienteIncluido = clienteService.consultar(idCliente);
-		compararValoresClienteIncluido(nomeInformado, limiteInformado, riscoInformado, RiscoEnum.B, clienteIncluido);
+		ComparadorCliente.compararValoresClienteIncluido(nomeInformado, limiteInformado, riscoInformado, RiscoEnum.B,
+				clienteIncluido);
 	}
 
 	@Test
@@ -121,14 +123,7 @@ public class IncluirClienteTest extends BaseTeste {
 		ClienteDto clienteDto = new ClienteDto(nomeInformado, limiteInformado, riscoInformado);
 		Long idCliente = clienteService.salvar(clienteDto).getId();
 		Cliente clienteIncluido = clienteService.consultar(idCliente);
-		compararValoresClienteIncluido(nomeInformado, limiteInformado, riscoInformado, RiscoEnum.C, clienteIncluido);
-	}
-
-	private void compararValoresClienteIncluido(String nomeInformado, Double limiteInformado, Character riscoInformado,
-			RiscoEnum riscoEnum, Cliente clienteIncluido) {
-		assertEquals("Nome diferente do esperado.", nomeInformado, clienteIncluido.getNome());
-		assertEquals("Limite diferente do esperado.", limiteInformado, clienteIncluido.getLimite());
-		assertEquals("Risco diferente do esperado.", riscoInformado, clienteIncluido.getRisco());
-		assertEquals("Taxa diferente do esperado", riscoEnum.getTaxa(), clienteIncluido.getTaxa());
+		ComparadorCliente.compararValoresClienteIncluido(nomeInformado, limiteInformado, riscoInformado, RiscoEnum.C,
+				clienteIncluido);
 	}
 }

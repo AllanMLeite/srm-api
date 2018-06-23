@@ -1,4 +1,4 @@
-package com.srm.api.cucumber.cliente.incluir;
+package com.srm.api.cliente.incluir;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
