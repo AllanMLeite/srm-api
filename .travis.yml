@@ -1,0 +1,17 @@
+install: gradle wrapper --gradle-version 4.2
+language: java
+jdk:
+  - oraclejdk8
+sudo: false
+dist: trusty
+addons:
+  sonarcloud:
+    organization: "allanmleite-github"
+    token:
+      secure: e7835f7d0927cab1377538b8726d4804265b7674
+before_script:
+  - chmod +x gradlew
+script:
+  - ./gradlew build
+  - ./gradlew test
+  - ./gradlew sonar
