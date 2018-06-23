@@ -1,8 +1,10 @@
 package com.srm.api.cucumber.cliente.incluir;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +29,10 @@ public class IncluirClienteTest {
 		try {
 			ClienteDto clienteDto = new ClienteDto(null, 100d, RiscoEnum.A.getCodigo());
 			clienteService.salvar(clienteDto);
-			Assert.fail("Nome não deveria ser preenchido.");
+			fail("Nome não deveria ser preenchido.");
 		} catch (RestClientException e) {
-			Assert.assertEquals("Nome não deveria ser preenchido.", "Informe o nome.", e.getMessage());
+			assertEquals("Nome não deveria ser preenchido.", "Informe o nome.", e.getMessage());
+			assertTrue(clienteService.listar().isEmpty());
 		}
 	}
 
@@ -38,9 +41,10 @@ public class IncluirClienteTest {
 		try {
 			ClienteDto clienteDto = new ClienteDto(" ", 100d, RiscoEnum.A.getCodigo());
 			clienteService.salvar(clienteDto);
-			Assert.fail("Nome não deveria ser preenchido.");
+			fail("Nome não deveria ser preenchido.");
 		} catch (RestClientException e) {
-			Assert.assertEquals("Nome não deveria ser preenchido.", "Informe o nome.", e.getMessage());
+			assertEquals("Nome não deveria ser preenchido.", "Informe o nome.", e.getMessage());
+			assertTrue(clienteService.listar().isEmpty());
 		}
 	}
 
@@ -49,9 +53,10 @@ public class IncluirClienteTest {
 		try {
 			ClienteDto clienteDto = new ClienteDto("Maria", null, RiscoEnum.A.getCodigo());
 			clienteService.salvar(clienteDto);
-			Assert.fail("Limite não deveria ser preenchido.");
+			fail("Limite não deveria ser preenchido.");
 		} catch (RestClientException e) {
-			Assert.assertEquals("Limite não deveria ser preenchido.", "Informe o limite.", e.getMessage());
+			assertEquals("Limite não deveria ser preenchido.", "Informe o limite.", e.getMessage());
+			assertTrue(clienteService.listar().isEmpty());
 		}
 	}
 
@@ -60,9 +65,10 @@ public class IncluirClienteTest {
 		try {
 			ClienteDto clienteDto = new ClienteDto("Maria", 20d, ' ');
 			clienteService.salvar(clienteDto);
-			Assert.fail("Risco não deveria ser preenchido.");
+			fail("Risco não deveria ser preenchido.");
 		} catch (RestClientException e) {
-			Assert.assertEquals("Risco não deveria ser preenchido.", "Informe o risco.", e.getMessage());
+			assertEquals("Risco não deveria ser preenchido.", "Informe o risco.", e.getMessage());
+			assertTrue(clienteService.listar().isEmpty());
 		}
 	}
 
@@ -72,9 +78,10 @@ public class IncluirClienteTest {
 			Character riscoInvalido = 'Z';
 			ClienteDto clienteDto = new ClienteDto("Maria", 20d, riscoInvalido);
 			clienteService.salvar(clienteDto);
-			Assert.fail("Risco não deveria ser válido.");
+			fail("Risco não deveria ser válido.");
 		} catch (RestClientException e) {
-			Assert.assertEquals("Risco não deveria ser válido.", "O risco deve ser A, B ou C.", e.getMessage());
+			assertEquals("Risco não deveria ser válido.", "O risco deve ser A, B ou C.", e.getMessage());
+			assertTrue(clienteService.listar().isEmpty());
 		}
 	}
 
@@ -83,12 +90,9 @@ public class IncluirClienteTest {
 		String nomeInformado = "Maria";
 		Double limiteInformado = 20d;
 		Character riscoInformado = RiscoEnum.A.getCodigo();
-
 		ClienteDto clienteDto = new ClienteDto(nomeInformado, limiteInformado, riscoInformado);
-
 		Long idCliente = clienteService.salvar(clienteDto).getId();
 		Cliente clienteIncluido = clienteService.consultar(idCliente);
-
 		compararValoresClienteIncluido(nomeInformado, limiteInformado, riscoInformado, RiscoEnum.A, clienteIncluido);
 	}
 
@@ -97,26 +101,20 @@ public class IncluirClienteTest {
 		String nomeInformado = "João";
 		Double limiteInformado = 25d;
 		Character riscoInformado = RiscoEnum.B.getCodigo();
-
 		ClienteDto clienteDto = new ClienteDto(nomeInformado, limiteInformado, riscoInformado);
-
 		Long idCliente = clienteService.salvar(clienteDto).getId();
 		Cliente clienteIncluido = clienteService.consultar(idCliente);
-
 		compararValoresClienteIncluido(nomeInformado, limiteInformado, riscoInformado, RiscoEnum.B, clienteIncluido);
 	}
-	
+
 	@Test
 	public void deveIncluirUmClienteComRiscoC() {
 		String nomeInformado = "Michele";
 		Double limiteInformado = 30d;
 		Character riscoInformado = RiscoEnum.C.getCodigo();
-
 		ClienteDto clienteDto = new ClienteDto(nomeInformado, limiteInformado, riscoInformado);
-
 		Long idCliente = clienteService.salvar(clienteDto).getId();
 		Cliente clienteIncluido = clienteService.consultar(idCliente);
-
 		compararValoresClienteIncluido(nomeInformado, limiteInformado, riscoInformado, RiscoEnum.C, clienteIncluido);
 	}
 
@@ -126,5 +124,12 @@ public class IncluirClienteTest {
 		assertEquals("Limite diferente do esperado.", limiteInformado, clienteIncluido.getLimite());
 		assertEquals("Risco diferente do esperado.", riscoInformado, clienteIncluido.getRisco());
 		assertEquals("Taxa diferente do esperado", riscoEnum.getTaxa(), clienteIncluido.getTaxa());
+	}
+
+	@Test
+	public void deveRetornarNuloParaUmClienteNaoExistente() {
+		assertNull(clienteService.consultar(0l));
+		assertNull(clienteService.consultar(-1l));
+		assertNull(clienteService.consultar(999l));
 	}
 }
