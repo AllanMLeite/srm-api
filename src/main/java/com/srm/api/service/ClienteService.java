@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClientException;
@@ -14,12 +15,12 @@ import com.srm.api.repository.ClienteRepository;
 @Service
 public class ClienteService {
 
-	@Resource
+	@Autowired 
 	private ClienteRepository clienteRepository;
 
 	public Cliente salvar(Cliente cliente) {
 		validarInclusao(cliente);
-		return clienteRepository.incluir(cliente);
+		return clienteRepository.save(cliente);
 	}
 
 	private void validarInclusao(Cliente cliente) {
@@ -49,6 +50,6 @@ public class ClienteService {
 	}
 
 	public ArrayList<Cliente> listar() {
-		return clienteRepository.listar();
+		return (ArrayList<Cliente>) clienteRepository.findAll();
 	}
 }

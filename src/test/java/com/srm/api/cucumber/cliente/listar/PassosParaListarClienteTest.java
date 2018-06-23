@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.srm.api.model.Cliente;
-import com.srm.api.repository.ClienteRepository;
 import com.srm.api.service.ClienteService;
 
 import cucumber.api.java.pt.Dado;
@@ -17,6 +17,8 @@ import cucumber.api.java.pt.Quando;
 public class PassosParaListarClienteTest {
 
 	private ArrayList<Cliente> clientes;
+
+	@Autowired
 	private ClienteService service;
 
 	@Dado("^que existe um cliente cadastrado chamado \"(.*?)\" com limite \"(.*?)\", risco \"(.*?)\" e taxa \"(.*?)\"$")
@@ -32,8 +34,7 @@ public class PassosParaListarClienteTest {
 
 	@Dado("^desejo visualizar os clientes cadastrados$")
 	public void desejo_visualizar_os_clientes_cadastrados() throws Throwable {
-		service = new ClienteService();
-		service.setClienteRepository(new ClienteRepository());
+		
 	}
 
 	@Quando("^listar$")

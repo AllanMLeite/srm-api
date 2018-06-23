@@ -16,7 +16,7 @@ Funcionalidade: Incluir cliente
       | limite | Informe o limite. |
 
   Cenario: Deve salvar o cliente
-    Dado que informei "Maurício" no campo "nome"
+    Dado que informei "Mauricio" no campo "nome"
     E que informei "B" no campo "risco"
     Quando incluir
     Entao salva o cliente

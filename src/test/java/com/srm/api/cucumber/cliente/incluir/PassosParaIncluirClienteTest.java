@@ -8,10 +8,10 @@ import java.lang.reflect.Field;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestClientException;
 
 import com.srm.api.model.Cliente;
-import com.srm.api.repository.ClienteRepository;
 import com.srm.api.service.ClienteService;
 
 import cucumber.api.java.pt.Dado;
@@ -23,10 +23,13 @@ public class PassosParaIncluirClienteTest {
 	private String mensagemErro;
 	private Cliente cliente;
 
+	@Autowired
+	private ClienteService service;
+
 	@Dado("^que estou incluindo um novo cliente$")
 	public void que_estou_incluindo_um_novo_usuario() throws Throwable {
 		cliente = new Cliente();
-		cliente.setNome("João");
+		cliente.setNome("Joao");
 		cliente.setRisco('A');
 		cliente.setLimite(Double.parseDouble("45"));
 	}
@@ -50,9 +53,6 @@ public class PassosParaIncluirClienteTest {
 
 	@Quando("^incluir$")
 	public void clico_em_Salvar() throws Throwable {
-		ClienteService service = new ClienteService();
-		service.setClienteRepository(new ClienteRepository());
-
 		try {
 			assertNull(cliente.getId());
 			cliente = service.salvar(cliente);
