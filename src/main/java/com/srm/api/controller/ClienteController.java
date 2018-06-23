@@ -1,5 +1,7 @@
 package com.srm.api.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,5 +21,10 @@ public class ClienteController {
 	@RequestMapping(value = "/cliente", method = RequestMethod.POST)
 	public Cliente incluir(@RequestBody Cliente cliente) {
 		return clienteService.salvar(cliente);
+	}
+	
+	@RequestMapping(value = "/cliente", method = RequestMethod.GET)
+	public List<Cliente> listar() {
+		return clienteService.listar();
 	}
 }
