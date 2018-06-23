@@ -22,13 +22,17 @@ public class Cliente {
 	private String nome;
 	private Double limite;
 	private Character risco;
-	private Integer taxa;
+	private Double taxa;
 
 	public Cliente() {
 	}
 
 	public Cliente(ClienteDto clienteDto) {
 		validarCampos(clienteDto);
+		nome = clienteDto.getNome();
+		limite = clienteDto.getLimite();
+		risco = clienteDto.getRisco();
+		taxa = RiscoEnum.valueOf(risco.toString()).getTaxa();
 	}
 
 	private void validarCampos(ClienteDto clienteDto) {
@@ -87,11 +91,11 @@ public class Cliente {
 		this.risco = risco;
 	}
 
-	public Integer getTaxa() {
+	public Double getTaxa() {
 		return taxa;
 	}
 
-	public void setTaxa(Integer taxa) {
+	public void setTaxa(Double taxa) {
 		this.taxa = taxa;
 	}
 }
