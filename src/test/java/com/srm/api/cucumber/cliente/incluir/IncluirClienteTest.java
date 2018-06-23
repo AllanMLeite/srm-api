@@ -1,10 +1,10 @@
 package com.srm.api.cucumber.cliente.incluir;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +19,16 @@ import com.srm.api.service.ClienteService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class IncluirClienteTest {
+public class IncluirClienteTest extends BaseTeste {
 
 	@Autowired
 	private ClienteService clienteService;
+
+	@After
+	@Override
+	public void finalizar() {
+		super.limparBase();
+	}
 
 	@Test
 	public void deveExibirMensagemQuandoNomeNulo() {
@@ -124,12 +130,5 @@ public class IncluirClienteTest {
 		assertEquals("Limite diferente do esperado.", limiteInformado, clienteIncluido.getLimite());
 		assertEquals("Risco diferente do esperado.", riscoInformado, clienteIncluido.getRisco());
 		assertEquals("Taxa diferente do esperado", riscoEnum.getTaxa(), clienteIncluido.getTaxa());
-	}
-
-	@Test
-	public void deveRetornarNuloParaUmClienteNaoExistente() {
-		assertNull(clienteService.consultar(0l));
-		assertNull(clienteService.consultar(-1l));
-		assertNull(clienteService.consultar(999l));
 	}
 }
