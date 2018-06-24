@@ -12,4 +12,4 @@ addons:
 before_script:
   - chmod +x gradlew
 script:
-  - ./gradlew clean build test sonarqube
+  - ./gradlew clean build test sonarRunner sonarqube
