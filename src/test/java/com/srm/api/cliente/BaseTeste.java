@@ -1,4 +1,4 @@
-package com.srm.api.cliente.incluir;
+package com.srm.api.cliente;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

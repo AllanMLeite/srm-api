@@ -1,4 +1,4 @@
-package com.srm.api.cliente.incluir;
+package com.srm.api.cliente;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
