@@ -10,4 +10,4 @@ addons:
     token:
       secure: e7835f7d0927cab1377538b8726d4804265b7674
 script:
-  - ./gradlew sonarqube
+  - ./gradlew clean build test sonarqube
