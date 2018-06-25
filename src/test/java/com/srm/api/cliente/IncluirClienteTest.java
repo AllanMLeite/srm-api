@@ -37,7 +37,7 @@ public class IncluirClienteTest extends BaseTeste {
 			clienteService.salvar(clienteDto);
 			fail("Nome não deveria ser preenchido.");
 		} catch (RestClientException e) {
-			assertEquals("Nome não deveria ser preenchido.", "Informe o nome", e.getMessage());
+			assertEquals("Nome não deveria ser preenchido.", "Informe o nome.", e.getMessage());
 			assertTrue(clienteService.listar().isEmpty());
 		}
 	}
